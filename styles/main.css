@@ -498,14 +498,14 @@ body {
   margin-bottom: 20px;
 }
 
-.repository a {
+.repository__title {
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--color-link);
   text-decoration: none;
 }
 
-.repository a:hover {
+.repository__title:hover {
   text-decoration: underline;
 }
 
@@ -533,6 +533,26 @@ body {
 
 .repository__btn img {
   margin-right: 5px;
+}
+
+.repository__topics {
+  display: flex;
+  margin: 10px 0;
+}
+
+.repository__topic {
+  font-size: 0.8rem;
+  color: #0366d6;
+  background-color: #f1f8ff;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 50px;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.repository__topic:hover {
+  background-color: #def;
 }
 
 .repository__details {

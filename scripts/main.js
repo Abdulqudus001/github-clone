@@ -5,9 +5,32 @@ const toggleNav = () => {
   nav.classList.toggle('open');
 };
 
+const renderTopics = ({ edges }) => {
+  console.log(edges);
+  if (edges.length < 1) {
+    return null;
+  } else {
+    const repositoryTopics = document.createElement('div');
+    repositoryTopics.classList.add('repository__topics');
+
+    edges.forEach(({ node }) => {
+      const { topic: { name }, url} = node;
+      console.log(url);
+      const singleRepositoryTopic = document.createElement('a');
+      singleRepositoryTopic.setAttribute('href', url);
+      singleRepositoryTopic.setAttribute('target', '_blank');
+      singleRepositoryTopic.classList.add('repository__topic');
+      singleRepositoryTopic.textContent = name;
+      repositoryTopics.appendChild(singleRepositoryTopic);
+    });
+
+    return repositoryTopics;
+  }
+}
 
 const createRepository = (repository) => {
   const link = document.createElement('a');
+  link.classList.add('repository__title');
   link.setAttribute('href', `https://github.com${repository.resourcePath}`);
   link.setAttribute('target', '_blank');
   link.setAttribute('rel', 'noopener noreferrer');
@@ -16,6 +39,9 @@ const createRepository = (repository) => {
   const description = document.createElement('p');
   description.classList.add('repository__description');
   description.textContent = repository.description;
+
+  // Render repository topics
+  const topics = renderTopics(repository.repositoryTopics);
 
   const updated = document.createElement('p');
   updated.classList.add('updated');
@@ -78,7 +104,11 @@ const createRepository = (repository) => {
   repoDetails.appendChild(updated);
 
   const div = document.createElement('div');
-  div.append(link, description, repoDetails);
+  div.append(link, description);
+  if (topics) {
+    div.append(topics);
+  }
+  div.append(repoDetails);
 
   const btn = document.createElement('btn');
   btn.classList.add('repository__btn');
@@ -164,7 +194,7 @@ const body = {
         emoji
         emojiHTML
       }
-      repositories(first: 20 orderBy: { field: PUSHED_AT, direction: DESC }) {
+      repositories(privacy:PUBLIC first: 20 orderBy: { field: PUSHED_AT, direction: DESC }) {
         totalCount
         edges {
           node {
@@ -175,6 +205,16 @@ const body = {
             resourcePath
             description
             stargazerCount
+            repositoryTopics (first: 5){
+              edges {
+                node {
+                  url
+                  topic {
+                    name
+                  }
+                }
+              }
+            }
             primaryLanguage {
               name
               color
@@ -217,6 +257,7 @@ fetch('https://api.github.com/graphql', fetchData)
     loaderImg.style.display = 'none';
   });
 
+
 const handleScroll = () => {
   const image = document.querySelector('.user__profile img');
   const avatar = document.querySelector('.avatar');
@@ -231,6 +272,8 @@ const handleScroll = () => {
   }
 };
 
+
+// Handle debounce for scroll event
 let debounce;
 window.addEventListener('scroll', () => {
   clearTimeout(debounce);
