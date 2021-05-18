@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuyCoins Challenge</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./styles/normalize.css">
+  <link rel="stylesheet" href="./styles/mixins.css">
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="loader">
+    <img class="loader__img" src="/images/github-black.svg" alt="">
+    <div class="error">
+      <img class="error__img" src="/images/block.svg" alt="">
+      <h1 class="error__text"></h1>
+    </div>
+  </div>
+  <header class="nav">
+    <button class="nav__menu d-block d-md-none" onclick="toggleNav()">
+      <i class="fa fa-bars fa-2x"></i>
+    </button>
+    <a href="/" class="nav__logo">
+      <img src="/images/github.svg" alt="">
+    </a>
+    <ul class="nav__items d-block d-md-flex">
+      <li class="nav__item search">
+        <input type="text" name="search" placeholder="Search or jump to...">
+      </li>
+      <li class="nav__item">
+        <a href="#1">
+          Pulls
+          <span class="d-md-none d-lg-inline">
+            requests
+          </span>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="#2">Issues</a>
+      </li>
+      <li class="nav__item">
+        <a href="#3">Marketplace</a>
+      </li>
+      <li class="nav__item">
+        <a href="#4">Explore</a>
+      </li>
+    </ul>
+    <div class="nav__actions d-flex">
+      <div class="badge">
+        <i class="fa fa-bell-o"></i>
+      </div>
+
+      <div class="dropdown d-none d-md-flex">
+        <img src="/images/plus.svg" alt="" width="14px" height="14px">
+        <i class="fa fa-caret-down fa-0.5x"></i>
+      </div>
+
+      <div class="dropdown d-none d-md-flex">
+        <img class="profile-img" src="https://picsum.photos/30/30/?blur" alt="" width="20px" height="20px">
+        <i class="fa fa-caret-down"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main__header d-none d-md-block">
+      <div class="container row">
+        <div class="col-col-md-3">
+          <div class="avatar">
+            <img src="https://picsum.photos/30/30/?blur" class="avatar__image">
+            <span class="avatar__name">
+              Abdulqudus001
+            </span>
+          </div>
+        </div>
+        <nav class="tabs col col-md-9">
+          <div class="tab__item">
+            <img src="./images/overview.svg" alt="">
+            Overview
+          </div>
+          <div class="tab__item tab__item--active">
+            <img src="./images/repo.svg" alt="">
+            Repositories
+          </div>
+          <div class="tab__item">
+            <img src="./images/project.svg" alt="">
+            Projects
+          </div>
+          <div class="tab__item">
+            <img src="./images/packages.svg" alt="">
+            Packages
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row content">
+        <div class="col col-12 col-md-3">
+          <div class="user">
+            <div class="user__profile">
+              <div class="user-img">
+                <img src="https://picsum.photos/30/30/?blur" alt="">
+                <div class="status">
+                  😃
+                  :sleeping:
+                </div>
+              </div>
+              <div>
+                <h2 class="user__name">
+                  Jane Doe
+                </h2>
+                <p class="user__account">
+                  Sample User
+                </p>
+              </div>
+            </div>
+            <p class="user__bio">
+              Frontend developer
+            </p>
+          </div>
+        </div>
+        <div class="col col-12 col-md-9">
+          <div class="repo">
+            <div class="main__header d-block d-md-none">
+              <div class="row">
+                <nav class="tabs col col-12">
+                  <div class="tab__item">
+                    <img src="./images/overview.svg" alt="">
+                    Overview
+                  </div>
+                  <div class="tab__item tab__item--active">
+                    <img src="./images/repo.svg" alt="">
+                    Repositories
+                  </div>
+                  <div class="tab__item">
+                    <img src="./images/project.svg" alt="">
+                    Projects
+                  </div>
+                  <div class="tab__item">
+                    <img src="./images/packages.svg" alt="">
+                    Packages
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <input class="repo__search" type="text" placeholder="Find a repository">
+            <div class="repo__overview">
+              <span id="repo-count">
+                124
+              </span>
+              results for
+              <span>public</span>
+              repositories
+            </div>
+            <ul class="repositories"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="./scripts/time-ago.js"></script>
+  <script src="./scripts/main.js"></script>
+</body>
+</html>
