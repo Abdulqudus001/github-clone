@@ -2,6 +2,7 @@
   --color-dark: #24292E;
   --color-white: #FFF;
   --color-link: #0366d6;
+  overflow-x: hidden;
 }
 
 * {
@@ -483,19 +484,28 @@ body {
 
 
 /* Repositories styles */
-
-.repositories {
-  
-}
-
 .repository {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: flex-start;
   padding-bottom: 20px;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .repository {
+    align-items: center;
+  }
+}
+
+.repository__content {
+  max-width: 80%;
+}
+
+.repository__btn__container {
+  width: 16.666667%;
 }
 
 .repository__title {
@@ -524,6 +534,8 @@ body {
   font-size: 12px;
   line-height: 20px;
   font-weight: 500;
+  width: fit-content;
+  margin-left: auto;
 }
 
 .repository__btn:hover {
@@ -557,6 +569,7 @@ body {
 
 .repository__details {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   font-size: 12px;
   color: rgba(0, 0, 0, .7);
@@ -574,6 +587,8 @@ body {
 
 .language {
   margin-right: 20px;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .language__color {

@@ -104,6 +104,7 @@ const createRepository = (repository) => {
   repoDetails.appendChild(updated);
 
   const div = document.createElement('div');
+  div.classList.add('repository__content')
   div.append(link, description);
   if (topics) {
     div.append(topics);
@@ -114,9 +115,13 @@ const createRepository = (repository) => {
   btn.classList.add('repository__btn');
   btn.innerHTML = `<img src="./images/star.svg" alt=""> Star`;
 
+  const starBtn = document.createElement('div');
+  starBtn.classList.add('repository__btn__container');
+  starBtn.append(btn);
+
   const repositoryContainer = document.createElement('li');
   repositoryContainer.classList.add('repository');
-  repositoryContainer.append(div, btn);
+  repositoryContainer.append(div, starBtn);
 
   return repositoryContainer
 };
