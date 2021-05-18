@@ -1,5 +1,5 @@
 # GetCards Africa Frontend Challenge
-This contains the solution to the buycoins africa challenge to clone the github repository page showing the first 20 repositories for a user. You can find the live site at https://getcards-challenge.netlify.app/
+This contains the solution to the getcards africa challenge to clone the github repository page showing the first 20 repositories for a user. You can find the live site at https://getcards-challenge.netlify.app/
 
 ## Contributing
 To run the project locally:
