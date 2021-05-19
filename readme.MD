@@ -7,7 +7,7 @@ To run the project locally:
  - Open up your github [developer settings](https://github.com/settings/tokens)
  - Create a new token and copy the new token generated.
  - Head over to local version of the app, locate the `main.js` file in the `scripts` folder
- - There's a `githubData` object in the file, should be around line 140 - 150.
+ - There's a `githubData` object in the file, should be around line ~140 - 150~ Accuratly line 180 to 187.
  - Add the token field, so you have something like this
  ```js
 const githubData = {
