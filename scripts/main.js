@@ -6,7 +6,6 @@ const toggleNav = () => {
 };
 
 const renderTopics = ({ edges }) => {
-  console.log(edges);
   if (edges.length < 1) {
     return null;
   } else {
@@ -15,7 +14,6 @@ const renderTopics = ({ edges }) => {
 
     edges.forEach(({ node }) => {
       const { topic: { name }, url} = node;
-      console.log(url);
       const singleRepositoryTopic = document.createElement('a');
       singleRepositoryTopic.setAttribute('href', url);
       singleRepositoryTopic.setAttribute('target', '_blank');
