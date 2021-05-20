@@ -180,86 +180,98 @@ loader.style.display = 'flex';
 
 const username = prompt('Enter github username');
 
-const githubData = {
-  username,
-};
+const handleError = (err) => {
+  document.querySelector('.error').style.display = 'block';
+  const errorMessage = document.querySelector('.error__text');
+  if (err.status === 101) {
+    errorMessage.textContent = err.message;
+  } else {
+    errorMessage.textContent = 'Something went wrong, please try again';
+  }
+  const loaderImg = document.querySelector('.loader__img');
+  loaderImg.style.display = 'none';
+}
 
-const body = {
-  query: `
-  query { 
-    user(login: "${githubData.username}") {
-      databaseId
-      id 
-      bio
-      avatarUrl
-      name
-      login
-      status {
-        emoji
-        emojiHTML
-      }
-      repositories(privacy:PUBLIC first: 20 orderBy: { field: PUSHED_AT, direction: DESC }) {
-        totalCount
-        edges {
-          node {
-            id
-            name
-            pushedAt
-            forkCount
-            resourcePath
-            description
-            stargazerCount
-            repositoryTopics (first: 5){
-              edges {
-                node {
-                  url
-                  topic {
-                    name
+try {
+  if (!username) {
+    throw({ status: 101, message: 'Invalid github username' });
+  }
+  
+  const githubData = {
+    username,
+  };
+  
+  const body = {
+    query: `
+    query { 
+      user(login: "${githubData.username}") {
+        databaseId
+        id 
+        bio
+        avatarUrl
+        name
+        login
+        status {
+          emoji
+          emojiHTML
+        }
+        repositories(privacy:PUBLIC first: 20 orderBy: { field: PUSHED_AT, direction: DESC }) {
+          totalCount
+          edges {
+            node {
+              id
+              name
+              pushedAt
+              forkCount
+              resourcePath
+              description
+              stargazerCount
+              repositoryTopics (first: 5){
+                edges {
+                  node {
+                    url
+                    topic {
+                      name
+                    }
                   }
                 }
               }
-            }
-            primaryLanguage {
-              name
-              color
+              primaryLanguage {
+                name
+                color
+              }
             }
           }
         }
       }
     }
-  }
-  `,
-};
-
-const fetchData = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `bearer ${githubData.token}`,
-  },
-  body: JSON.stringify(body),
-  method: 'POST',
-};
-
-fetch('https://api.github.com/graphql', fetchData)
-  .then((res) => res.json())
-  .then(({ data: { user } }) => {
-    if (user) {
-      populateDOM(user);
-    } else {
-      throw({ status: 101, message: 'User does not exist' });
-    }
-  })
-  .catch((err) => {
-    document.querySelector('.error').style.display = 'block';
-    const errorMessage = document.querySelector('.error__text');
-    if (err.status === 101) {
-      errorMessage.textContent = err.message;
-    } else {
-      errorMessage.textContent = 'Something went wrong, please try again';
-    }
-    const loaderImg = document.querySelector('.loader__img');
-    loaderImg.style.display = 'none';
-  });
+    `,
+  };
+  
+  const fetchData = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `bearer ${githubData.token}`,
+    },
+    body: JSON.stringify(body),
+    method: 'POST',
+  };
+  
+  fetch('https://api.github.com/graphql', fetchData)
+    .then((res) => res.json())
+    .then(({ data: { user } }) => {
+      if (user) {
+        populateDOM(user);
+      } else {
+        throw({ status: 101, message: 'User does not exist' });
+      }
+    })
+    .catch((err) => {
+      handleError(err);
+    });
+} catch (err) {
+  handleError(err);
+}
 
 
 const handleScroll = () => {
